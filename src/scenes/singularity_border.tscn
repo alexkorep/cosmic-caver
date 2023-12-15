@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/singularity_border.gd" type="Script" id=1]
+
+[node name="SingularityBorder" type="StaticBody2D"]
+script = ExtResource( 1 )
+radial_line_length = 1500
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
