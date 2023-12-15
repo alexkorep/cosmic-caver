@@ -11,7 +11,6 @@ func _ready():
 	pass
 
 func _process(delta):
-	print(rotation_degrees)
 	if Input.is_action_pressed('ui_up'):
 		speed += acceleration * delta
 	elif Input.is_action_pressed('ui_down'):
