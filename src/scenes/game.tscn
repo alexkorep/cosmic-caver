@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ship01.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/background/stars-background.png" type="Texture" id=2]
+
+[node name="game" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1024, 1024 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Spaceship" parent="." instance=ExtResource( 1 )]
+position = Vector2( 182, 360 )
