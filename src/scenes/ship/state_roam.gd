@@ -1,30 +1,69 @@
 extends State
 
-var speed = 0.0
-var rotation_speed = 1.0
-var acceleration = 50.0
-var deceleration = 50.0
+var speed = 100.0
+var rotation_speed = 1
+
+var current_tween: Tween = null
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(_msg := {}) -> void:
-	pass
+	# If rotation is more than 360, make it less than 360
+	owner.rotation = wrap_angle(owner.rotation)
 
 func update(delta: float) -> void:
-	if Input.is_action_pressed('ui_up'):
-		speed += acceleration * delta
-		if speed > owner.max_speed:
-			speed = owner.max_speed
-	elif Input.is_action_pressed('ui_down'):
-		speed -= deceleration * delta
-		if speed < -owner.max_speed:
-			speed = -owner.max_speed
-	if Input.is_action_pressed('ui_left'):
-		owner.rotation_degrees -= rotation_speed
-	elif Input.is_action_pressed('ui_right'):
-		owner.rotation_degrees += rotation_speed
+	pass	
+	
+func handle_input(event: InputEvent) -> void:
+	if ((event is InputEventMouseButton and event.pressed) or 
+		(event is InputEventScreenTouch and event.pressed)):
+		# Convert event.position to world coordinates
+		# var world_position = event.position
+		# var world_position = owner.get_viewport().get_camera_2d().unproject_position(event.position)
+		var world_position = owner.get_global_mouse_position()
+		move_to(world_position)
+	
+func move_to(target: Vector2) -> void:
+	stop_all()
 
-	var linear_velocity = Vector2.UP.rotated(owner.rotation) * speed
-	owner.move_and_slide(linear_velocity)
-	
-	
-	
+	current_tween = Tween.new()
+	owner.add_child(current_tween)
+
+	# Rotate to face the target
+	var direction_to_target = target - owner.position
+	var target_angle = direction_to_target.angle() + PI / 2
+	var diff = target_angle - owner.rotation
+	# If the difference is more than 180, rotate the other way
+	if diff > PI:
+		target_angle -= 2 * PI
+	elif diff < -PI:
+		target_angle += 2 * PI
+	# Calculate duration based on rotation speed
+	var duration = abs((target_angle - owner.rotation) / rotation_speed)
+	current_tween.interpolate_property(owner, "rotation", 
+		owner.rotation, target_angle, duration, 
+		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	# Connect the tween_completed signal to start moving
+	current_tween.connect("tween_completed", self, "_on_rotation_completed", [target])
+	current_tween.start()
+
+func _on_rotation_completed(object: Object, key: NodePath, target: Vector2) -> void:
+	owner.rotation = wrap_angle(owner.rotation)
+	# Start moving to the target
+	# Calculate duration based on speed
+	var move_duration = owner.position.distance_to(target) / speed
+	current_tween.interpolate_property(owner, "position", owner.position, target, move_duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	current_tween.start()
+
+func wrap_angle(angle):
+	var two_pi = 2 * PI
+	return angle - floor(angle / two_pi) * two_pi
+
+func stop_all():
+	if current_tween != null:
+		current_tween.stop_all()
+		current_tween.queue_free()
+
+func exit() -> void:
+	print("Exit")
+	stop_all()
+

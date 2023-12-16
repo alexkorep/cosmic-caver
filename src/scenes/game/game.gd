@@ -32,3 +32,7 @@ func reset_scene():
 
 func on_asteroid_hit():
 	GameOverDialog.show_gameover()
+
+
+func _on_Spaceship_ship_submerged():
+	get_tree().change_scene("res://scenes/briefing_screen/briefing_screen.tscn")

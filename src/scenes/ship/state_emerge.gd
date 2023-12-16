@@ -3,6 +3,9 @@ extends State
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(_msg := {}) -> void:
+	# Disable collisions for owner
+	owner.set_collision_layer_bit(0, false)
+
 	# We must declare all the properties we access through `owner` in the `Player.gd` script.
 	owner.scale = Vector2.ZERO
 	owner.rotation_degrees = 0
@@ -21,3 +24,7 @@ func _on_tween_completed(object: Object, key: NodePath) -> void:
 
 func update(delta: float) -> void:
 	pass
+
+func exit() -> void:
+	# Enable collisions for owner
+	owner.set_collision_layer_bit(0, true)

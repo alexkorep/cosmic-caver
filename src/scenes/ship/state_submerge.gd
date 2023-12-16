@@ -1,8 +1,19 @@
 extends State
 
 func enter(_msg := {}) -> void:
-	var target_degrees = owner.rotation_degrees + 360
+	# Disable collisions for owner
+	owner.set_collision_layer_bit(0, false)
+
 	var target_position = Vector2(0, 0)
+
+	var direction_to_target = target_position - owner.position
+	var target_angle = direction_to_target.angle() + PI / 2
+	var diff = target_angle - owner.rotation
+	if diff > PI:
+		target_angle -= 2 * PI
+	elif diff < -PI:
+		target_angle += 2 * PI
+
 
 	var tween = Tween.new()
 	owner.add_child(tween)
@@ -10,7 +21,7 @@ func enter(_msg := {}) -> void:
 	var duration = 2.0
 	tween.interpolate_property(owner, "scale", owner.scale, Vector2.ZERO, duration, 
 		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	tween.interpolate_property(owner, "rotation_degrees", owner.rotation_degrees, 360, duration, 
+	tween.interpolate_property(owner, "rotation", owner.rotation, target_angle, duration, 
 		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tween.interpolate_property(owner, "position", owner.position, target_position, duration, 
 		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
@@ -20,3 +31,7 @@ func enter(_msg := {}) -> void:
 
 func _on_tween_completed(object: Object, key: NodePath) -> void:
 	owner.emit_ship_submerged()
+
+func wrap_angle(angle):
+	var two_pi = 2 * PI
+	return angle - floor(angle / two_pi) * two_pi
