@@ -1,17 +1,17 @@
 extends Node2D
 
-signal asteroid_hit()
+signal asteroid_hit(asteroid, body)
 
 export var asteroid_count := 10
 export var spread_radius := 1000
 
-var asteriod_scene = preload("res://scenes/asteroid/asteroid.tscn")
+var asteroid_scene = preload("res://scenes/asteroid/asteroid.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Add child asteroids
 	for _i in range(asteroid_count):
-		var asteroid = asteriod_scene.instance()
+		var asteroid = asteroid_scene.instance()
 		# Subscribe for events
 		asteroid.connect("asteroid_hit", self, "on_asteroid_hit")
 		add_child(asteroid)
@@ -20,7 +20,6 @@ func _ready():
 
 		# asteroid.velocity = Vector2(rand_range(-100, 100), rand_range(-100, 100))
 		asteroid.rotation = rand_range(0, 2 * PI)
-		asteroid.angular_velocity = rand_range(-1, 1)
 
 func random_position_within_circle(spread_radius):
 	while true:
@@ -29,6 +28,6 @@ func random_position_within_circle(spread_radius):
 		if position.length() < spread_radius:
 			return position
 
-func on_asteroid_hit():
-	emit_signal("asteroid_hit")
+func on_asteroid_hit(asteroid, body):
+	emit_signal("asteroid_hit", asteroid, body)
 

@@ -41,3 +41,8 @@ func _on_Spaceship_ship_submerged():
 
 func on_story_message(message):
 	StoryDialog.display_message(message)
+
+
+func _on_Spaceship_ship_exploded():
+	# Reload the scene
+	reset_scene()

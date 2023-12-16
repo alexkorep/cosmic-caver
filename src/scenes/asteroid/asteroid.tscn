@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 59.6657
 
-[node name="Asteriod" type="RigidBody2D"]
+[node name="Asteroid" type="RigidBody2D"]
 collision_layer = 0
 contacts_reported = 1
 contact_monitor = true
