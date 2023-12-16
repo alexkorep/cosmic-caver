@@ -9,11 +9,12 @@ export var dust_to_collect = 10
 onready var HUD = $CanvasLayer/HUD
 onready var GameOverDialog = $CanvasLayer/GameOverDialog
 onready var Spaceship = $Spaceship
+onready var StoryDialog = $CanvasLayer/StoryDialog
+onready var StoryManager = $StoryManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	StoryManager.on_level(GameState.get_current_level())
 
 func on_dust_collected():
 	dust_collected += 1
@@ -29,10 +30,14 @@ func reset_scene():
 	var scene_path = current_scene.filename
 	get_tree().change_scene(scene_path)
 
-
 func on_asteroid_hit():
 	GameOverDialog.show_gameover()
 
-
 func _on_Spaceship_ship_submerged():
-	get_tree().change_scene("res://scenes/briefing_screen/briefing_screen.tscn")
+	# TODO comnect the story manager directly
+	GameState.next_level()
+	# Reload the scene
+	reset_scene()
+
+func on_story_message(message):
+	StoryDialog.display_message(message)

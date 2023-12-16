@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/mothership/mothership1.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/dust/dust.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game_over_dialog/game_over_dialog.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/StoryDialog/story_dialog.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/story/story_manager.tscn" type="PackedScene" id=9]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 1 )
@@ -47,6 +48,10 @@ mouse_filter = 2
 
 [node name="StoryDialog" parent="CanvasLayer" instance=ExtResource( 8 )]
 
+[node name="StoryManager" parent="." instance=ExtResource( 9 )]
+
+[connection signal="ship_clicked_outside_range" from="Spaceship" to="StoryManager" method="on_clicked_outside_range"]
 [connection signal="ship_submerged" from="Spaceship" to="." method="_on_Spaceship_ship_submerged"]
 [connection signal="on_dust_collected" from="Dust" to="." method="on_dust_collected"]
 [connection signal="new_game" from="CanvasLayer/GameOverDialog" to="." method="on_game_over_dialog_new_game"]
+[connection signal="on_story_message" from="StoryManager" to="." method="on_story_message"]

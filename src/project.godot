@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://scenes/state_machine/state_machine.gd"
+}, {
+"base": "Node",
+"class": "StoryManager",
+"language": "GDScript",
+"path": "res://scenes/story/story_manager.gd"
 } ]
 _global_script_class_icons={
 "SpaceshipStateMachine": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"StoryManager": ""
 }
 
 [application]
@@ -35,6 +41,10 @@ _global_script_class_icons={
 config/name="Space Shooter"
 run/main_scene="res://scenes/game/game.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameState="*res://scenes/game/game_state.gd"
 
 [display]
 

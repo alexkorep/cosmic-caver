@@ -1,5 +1,7 @@
 extends State
 
+var finished := false
+
 func enter(_msg := {}) -> void:
 	# Disable collisions for owner
 	owner.set_collision_layer_bit(0, false)
@@ -30,7 +32,11 @@ func enter(_msg := {}) -> void:
 	tween.start()
 
 func _on_tween_completed(object: Object, key: NodePath) -> void:
-	owner.emit_ship_submerged()
+	# This event is called 3 times - once for each property.
+	# finished flag is used to emit only once. 
+	if not finished:
+		owner.emit_ship_submerged()
+		finished = true
 
 func wrap_angle(angle):
 	var two_pi = 2 * PI
