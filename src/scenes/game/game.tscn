@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
+[ext_resource path="res://assets/background/stars-background.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ship/ship01.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/HUD/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/singularity_border/singularity_border.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/dust/dust.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/game_over_dialog/game_over_dialog.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/asteroid/asteroids.tscn" type="PackedScene" id=8]
+
+[node name="game" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1024, 1024 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Spaceship" parent="." instance=ExtResource( 3 )]
+position = Vector2( 182, 360 )
+
+[node name="SingularityBorder" parent="." instance=ExtResource( 5 )]
+radius = 1500
+
+[node name="Dust" parent="." instance=ExtResource( 6 )]
+size = 300
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
+anchor_bottom = 1.0
+margin_bottom = 0.0
+
+[node name="GameOverDialog" parent="CanvasLayer" instance=ExtResource( 7 )]
+
+[node name="Asteroids" parent="." instance=ExtResource( 8 )]
+
+[connection signal="on_dust_collected" from="Dust" to="." method="on_dust_collected"]
+[connection signal="new_game" from="CanvasLayer/GameOverDialog" to="." method="on_game_over_dialog_new_game"]
+[connection signal="asteroid_hit" from="Asteroids" to="." method="on_asteroid_hit"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scripts/singularity_border.gd" type="Script" id=1]
+[ext_resource path="res://scenes/singularity_border/singularity_border.gd" type="Script" id=1]
 
 [node name="SingularityBorder" type="StaticBody2D"]
 script = ExtResource( 1 )

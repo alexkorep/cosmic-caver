@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Space Shooter"
-run/main_scene="res://scenes/game.tscn"
+run/main_scene="res://scenes/game/game.tscn"
 config/icon="res://icon.png"
 
 [display]
