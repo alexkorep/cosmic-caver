@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/mothership/mothership1.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/singularity_border/singularity_border.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/dust/dust.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game_over_dialog/game_over_dialog.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/StoryDialog/story_dialog.tscn" type="PackedScene" id=8]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,6 +40,8 @@ anchor_bottom = 1.0
 margin_bottom = 0.0
 
 [node name="GameOverDialog" parent="CanvasLayer" instance=ExtResource( 7 )]
+
+[node name="Node2D" parent="CanvasLayer" instance=ExtResource( 8 )]
 
 [connection signal="on_dust_collected" from="Dust" to="." method="on_dust_collected"]
 [connection signal="new_game" from="CanvasLayer/GameOverDialog" to="." method="on_game_over_dialog_new_game"]

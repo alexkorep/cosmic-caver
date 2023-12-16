@@ -2,8 +2,8 @@ extends Node2D
 
 signal asteroid_hit()
 
-export var asteroid_count = 10
-export var spread_radius = 1000
+export var asteroid_count := 10
+export var spread_radius := 1000
 
 var asteriod_scene = preload("res://scenes/asteroid/asteroid.tscn")
 

@@ -8,6 +8,28 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "StateMachine",
+"class": "SpaceshipStateMachine",
+"language": "GDScript",
+"path": "res://scenes/ship/SpaceshipStateMachine.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://scenes/state_machine/state.gd"
+}, {
+"base": "Reference",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://scenes/state_machine/state_machine.gd"
+} ]
+_global_script_class_icons={
+"SpaceshipStateMachine": "",
+"State": "",
+"StateMachine": ""
+}
+
 [application]
 
 config/name="Space Shooter"
