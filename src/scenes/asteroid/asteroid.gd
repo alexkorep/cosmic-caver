@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Asteroid
 
 signal asteroid_hit(asteroid, body)
 
@@ -20,4 +21,5 @@ func _ready():
 			CollisionShape2D.shape.radius = visible_size.x / 2
 
 func on_body_entered(body):
+
 	emit_signal("asteroid_hit", self, body)

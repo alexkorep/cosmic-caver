@@ -1,10 +1,12 @@
 extends KinematicBody2D
+class_name Spaceship
 
 signal ship_submerged
 signal ship_clicked_outside_range
 signal ship_exploded
 
-export var max_speed := 100.0
+export var max_speed := 200.0
+export var max_rotation_speed := 2
 export var max_range := 500
 
 onready var SpaceshipStateMachine = $SpaceshipStateMachine
@@ -25,6 +27,7 @@ func emit_ship_exploded():
 	emit_signal("ship_exploded")
 	
 func on_asteroid_hit(asteroid, body):
-	if asteroid.name == 'Asteroid' and body.name == 'Spaceship':
+	print("on_asteroid_hit: ", asteroid.name, ', ', body.name)
+	if asteroid is Asteroid and body == self:
 		print("1")
 		SpaceshipStateMachine.transition_to("Explode")

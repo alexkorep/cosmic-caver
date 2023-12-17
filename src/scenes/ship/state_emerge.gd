@@ -20,7 +20,7 @@ func enter(_msg := {}) -> void:
 	tween.start()  # Start the Tween
 
 func _on_tween_completed(object: Object, key: NodePath) -> void:
-	state_machine.transition_to("Roam")
+	state_machine.transition_to("RoamWithCollisions")
 
 func update(delta: float) -> void:
 	pass

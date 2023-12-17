@@ -1,0 +1,3 @@
+extends ItemResource
+class_name CrystalResource
+

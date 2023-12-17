@@ -1,9 +1,10 @@
 extends State
 
-var speed = 100.0
-var rotation_speed = 1
-
 var current_tween: Tween = null
+
+var velocity = Vector2.ZERO
+
+var move_end_time = 0
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(_msg := {}) -> void:
@@ -11,7 +12,8 @@ func enter(_msg := {}) -> void:
 	owner.rotation = wrap_angle(owner.rotation)
 
 func update(delta: float) -> void:
-	pass	
+	if OS.get_ticks_msec() <= move_end_time:
+		owner.move_and_slide(velocity)
 	
 func handle_input(event: InputEvent) -> void:
 	if ((event is InputEventMouseButton and event.pressed) or 
@@ -43,7 +45,7 @@ func move_to(target: Vector2) -> void:
 	elif diff < -PI:
 		target_angle += 2 * PI
 	# Calculate duration based on rotation speed
-	var duration = abs((target_angle - owner.rotation) / rotation_speed)
+	var duration = abs((target_angle - owner.rotation) / owner.max_rotation_speed)
 	current_tween.interpolate_property(owner, "rotation", 
 		owner.rotation, target_angle, duration, 
 		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
@@ -55,11 +57,13 @@ func _on_rotation_completed(object: Object, key: NodePath, target: Vector2) -> v
 	owner.rotation = wrap_angle(owner.rotation)
 	# Start moving to the target
 	# Calculate duration based on speed
-	#var move_duration = owner.position.distance_to(target) / speed
-	#current_tween.interpolate_property(owner, "position", owner.position, target, move_duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	#current_tween.start()
-	owner.velocity = 100
-	owner.move_and_slide()
+	var move_duration = owner.position.distance_to(target) / owner.max_speed
+	# Get timer end time
+	move_end_time = OS.get_ticks_msec() + move_duration * 1000
+	# Move to the target
+	# Set owner speed towards target
+	velocity = (target - owner.position).normalized() * owner.max_speed
+	owner.move_and_slide(velocity)
 
 func wrap_angle(angle):
 	var two_pi = 2 * PI

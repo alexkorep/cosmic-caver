@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/mothership/mothership1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ship/ship01.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/HUD/HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/singularity_border/singularity_border.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/dust/dust.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/resouce_emitter/resource_emitter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game_over_dialog/game_over_dialog.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/StoryDialog/story_dialog.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/story_dialog/story_dialog.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/story/story_manager.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/asteroid/asteroids.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/cave/cave.tscn" type="PackedScene" id=10]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 1 )
@@ -31,12 +30,23 @@ modulate = Color( 0.235294, 0.235294, 0.235294, 1 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
+[node name="Cave" parent="." instance=ExtResource( 10 )]
+
+[node name="ResourceEmitters" type="Node2D" parent="."]
+
+[node name="Sulfur" parent="ResourceEmitters" instance=ExtResource( 5 )]
+position = Vector2( 229, 320 )
+
+[node name="Azurite" parent="ResourceEmitters" instance=ExtResource( 5 )]
+position = Vector2( 263, 1037 )
+resource_type = 1
+
+[node name="Chromium" parent="ResourceEmitters" instance=ExtResource( 5 )]
+position = Vector2( 1925, 466 )
+resource_type = 2
+
 [node name="Spaceship" parent="." instance=ExtResource( 3 )]
-
-[node name="SingularityBorder" parent="." instance=ExtResource( 5 )]
-
-[node name="Dust" parent="." instance=ExtResource( 6 )]
-size = 300
+max_range = 500000
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -52,12 +62,8 @@ mouse_filter = 2
 
 [node name="StoryManager" parent="." instance=ExtResource( 9 )]
 
-[node name="Asteroids" parent="." instance=ExtResource( 10 )]
-
 [connection signal="ship_clicked_outside_range" from="Spaceship" to="StoryManager" method="on_clicked_outside_range"]
 [connection signal="ship_exploded" from="Spaceship" to="." method="_on_Spaceship_ship_exploded"]
 [connection signal="ship_submerged" from="Spaceship" to="." method="_on_Spaceship_ship_submerged"]
-[connection signal="on_dust_collected" from="Dust" to="." method="on_dust_collected"]
 [connection signal="new_game" from="CanvasLayer/GameOverDialog" to="." method="on_game_over_dialog_new_game"]
 [connection signal="on_story_message" from="StoryManager" to="." method="on_story_message"]
-[connection signal="asteroid_hit" from="Asteroids" to="Spaceship" method="on_asteroid_hit"]

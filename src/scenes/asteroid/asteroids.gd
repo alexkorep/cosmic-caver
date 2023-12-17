@@ -5,7 +5,7 @@ signal asteroid_hit(asteroid, body)
 export var asteroid_count := 10
 export var spread_radius := 1000
 
-var asteroid_scene = preload("res://scenes/asteroid/asteroid.tscn")
+var asteroid_scene = preload("res://scenes/asteroid/Asteroid.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +20,7 @@ func _ready():
 
 		# asteroid.velocity = Vector2(rand_range(-100, 100), rand_range(-100, 100))
 		asteroid.rotation = rand_range(0, 2 * PI)
+		
 
 func random_position_within_circle(spread_radius):
 	while true:
