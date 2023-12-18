@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/inventory/inventory_slot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/crystals/azurite.tres" type="Resource" id=2]
+[ext_resource path="res://resources/crystals/carbon.tres" type="Resource" id=3]
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -15,20 +16,28 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
-margin_right = 84.0
+margin_right = 128.0
 margin_bottom = 40.0
 columns = 4
+
+[node name="Carbon" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+inventory_item = ExtResource( 3 )
 
 [node name="Azurite" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 40.0
+margin_left = 44.0
+margin_right = 84.0
 margin_bottom = 40.0
 inventory_item = ExtResource( 2 )
 
 [node name="Sulfur" parent="ScrollContainer/GridContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 44.0
-margin_right = 84.0
+margin_left = 88.0
+margin_right = 128.0
 margin_bottom = 40.0

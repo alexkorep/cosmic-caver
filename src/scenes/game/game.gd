@@ -6,7 +6,6 @@ extends Node2D
 var dust_collected = 0
 export var dust_to_collect = 10
 
-onready var HUD = $CanvasLayer/HUD
 onready var GameOverDialog = $CanvasLayer/GameOverDialog
 onready var Spaceship = $Spaceship
 onready var StoryDialog = $CanvasLayer/StoryDialog
@@ -18,7 +17,6 @@ func _ready():
 
 func on_dust_collected():
 	dust_collected += 1
-	HUD.set_dust_collected(dust_collected)
 	if dust_collected >= dust_to_collect:
 		Spaceship.mission_completed()
 

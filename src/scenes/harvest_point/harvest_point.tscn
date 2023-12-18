@@ -1,14 +1,32 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/harvest_point/harvest_point.gd" type="Script" id=1]
-[ext_resource path="res://assets/resources/Azurite.png" type="Texture" id=2]
-[ext_resource path="res://assets/cave/crystal-small.png" type="Texture" id=3]
+[ext_resource path="res://assets/particle-collector/pcm03.png" type="Texture" id=2]
+[ext_resource path="res://assets/debris/debris_piece.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 99.3227
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 46.8402
+radius = 56.0
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
 
 [node name="HarvestPoint" type="Area2D"]
 collision_layer = 0
@@ -27,7 +45,7 @@ scale_amount = 0.2
 scale_amount_random = 0.51
 
 [node name="ResourceIconSprite" type="Sprite" parent="."]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 region_rect = Rect2( 864.258, 664.992, 101.535, 77.5256 )
 
@@ -40,8 +58,25 @@ shape = SubResource( 1 )
 position = Vector2( 0, 1 )
 shape = SubResource( 2 )
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = -22.0
+margin_top = -3.0
+margin_right = 22.0
+margin_bottom = 3.0
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+max_value = 10.0
+step = 1.0
+value = 6.0
+percent_visible = false
+
 [node name="ResourceHarvestedTimer" type="Timer" parent="."]
+
+[node name="ResouceRestoreTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
 
 [connection signal="body_entered" from="." to="." method="on_body_entered"]
 [connection signal="body_exited" from="." to="." method="on_body_exited"]
 [connection signal="timeout" from="ResourceHarvestedTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="ResouceRestoreTimer" to="." method="_on_ResouceRestoreTimer_timeout"]

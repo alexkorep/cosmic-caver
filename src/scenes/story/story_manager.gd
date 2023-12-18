@@ -11,13 +11,13 @@ var messages = [
 # Level 0
 [
 """
-All I know is that I need to collect 20 pieces of dust.
+All I know is that I need to collect 20 pieces of carbon.
 I need to bring them back to Mother.
 """,
 
 """
 Mother is building something.
-She needs all the dust she can get.
+She needs all the carbon she can get.
 """,
 
 """
@@ -34,7 +34,7 @@ Mother is happy.
 """,
 
 """
-I'm going to go back out and collect more dust.
+I'm going to go back out and collect more carbon.
 """,
 
 ]

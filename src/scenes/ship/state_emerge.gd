@@ -15,7 +15,7 @@ func enter(_msg := {}) -> void:
 	var normal_size = Vector2(1, 1)  # Replace with your normal size if different
 	var duration = 2.0  # Duration of the scaling animation in seconds
 	tween.interpolate_property(owner, "scale", Vector2.ZERO, normal_size, duration, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	tween.interpolate_property(owner, "rotation_degrees", owner.rotation_degrees, 360, duration, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	tween.interpolate_property(owner, "rotation_degrees", owner.rotation_degrees, 180, duration, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tween.connect("tween_completed", self, "_on_tween_completed")
 	tween.start()  # Start the Tween
 

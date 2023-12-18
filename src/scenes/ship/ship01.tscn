@@ -17,8 +17,8 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 40, 32.5 )
+[sub_resource type="CircleShape2D" id=4]
+radius = 40.4475
 
 [node name="Spaceship" type="KinematicBody2D"]
 collision_mask = 0
@@ -26,6 +26,7 @@ script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 2, 2 )
 limit_smoothed = true
 smoothing_enabled = true
 editor_draw_limits = true
@@ -95,7 +96,8 @@ scale_amount_random = 1.0
 color_ramp = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+position = Vector2( 0, 4 )
+shape = SubResource( 4 )
 
 [node name="SpaceshipStateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
