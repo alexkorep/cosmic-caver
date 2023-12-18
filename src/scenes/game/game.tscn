@@ -1,14 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/mothership/mothership1.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ship/ship01.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/HUD/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/harvest_point/harvest_point.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/crystals/sulfur.tres" type="Resource" id=6]
 [ext_resource path="res://scenes/game_over_dialog/game_over_dialog.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/story_dialog/story_dialog.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/story/story_manager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/cave/cave.tscn" type="PackedScene" id=10]
+[ext_resource path="res://resources/crystals/azurite.tres" type="Resource" id=11]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 1 )
@@ -32,18 +34,15 @@ texture = ExtResource( 2 )
 
 [node name="Cave" parent="." instance=ExtResource( 10 )]
 
-[node name="ResourceEmitters" type="Node2D" parent="."]
+[node name="HarvestPoints" type="Node2D" parent="."]
 
-[node name="Sulfur" parent="ResourceEmitters" instance=ExtResource( 5 )]
+[node name="Sulfur" parent="HarvestPoints" instance=ExtResource( 5 )]
 position = Vector2( 229, 320 )
+inventory_item = ExtResource( 6 )
 
-[node name="Azurite" parent="ResourceEmitters" instance=ExtResource( 5 )]
+[node name="Azurite" parent="HarvestPoints" instance=ExtResource( 5 )]
 position = Vector2( 263, 1037 )
-resource_type = 1
-
-[node name="Chromium" parent="ResourceEmitters" instance=ExtResource( 5 )]
-position = Vector2( 1925, 466 )
-resource_type = 2
+inventory_item = ExtResource( 11 )
 
 [node name="Spaceship" parent="." instance=ExtResource( 3 )]
 max_range = 500000

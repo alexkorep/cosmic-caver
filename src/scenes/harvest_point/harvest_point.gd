@@ -21,42 +21,32 @@ Iron Silicates: Minerals like olivine or peridot can have a green color due to i
 
 """
 
-enum ResourceType { 
-	Sulfur, # Orange
-	Azurite, # Blue
-	Chromium  # Green
-}
 
-export(ResourceType) var resource_type setget set_resource_type
+export(Resource) var inventory_item setget set_inventory_item
 
-
-onready var Sprites = $Sprites
+onready var ResourceIconSprite = $ResourceIconSprite
 onready var CPUParticles2D = $CPUParticles2D
-
+onready var ResourceHarvestedTimer = $ResourceHarvestedTimer
 var nearby_body = null
 
 # This setter function gets called every time resource_type changes
-func set_resource_type(value):
-	resource_type = value
-	update_sprites()
+func set_inventory_item(value):
+	inventory_item = value
+	update_sprite()
 
 func _ready():
-	update_sprites()
+	update_sprite()
 
 func _process(delta):
 	# This is needed to make sure the sprites update in the editor
-	update_sprites()
+	update_sprite()
 	if nearby_body:
 		CPUParticles2D.direction = (nearby_body.global_position - global_position).normalized()
 
-
-func update_sprites():
-	# Show the child of Sprites with the same index as the resource type, and hide the others
-	if not Sprites:
+func update_sprite():
+	if not inventory_item:
 		return
-	for i in range(Sprites.get_child_count()):
-		Sprites.get_child(i).visible = i == resource_type
-
+	$ResourceIconSprite.texture = inventory_item.icon
 
 func on_body_entered(body):
 	# Start emitting CPUParticles2D when the player enters the area, towards the player
@@ -64,7 +54,12 @@ func on_body_entered(body):
 		nearby_body = body
 		CPUParticles2D.direction = (nearby_body.global_position - global_position).normalized()
 		CPUParticles2D.emitting = true
+		ResourceHarvestedTimer.start()
 
 func on_body_exited(body):
 	CPUParticles2D.emitting = false
 	nearby_body = null
+	ResourceHarvestedTimer.stop()
+
+func _on_Timer_timeout():
+	PlayerInventory.add_item(inventory_item)

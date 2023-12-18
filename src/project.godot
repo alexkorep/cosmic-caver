@@ -22,17 +22,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "InventoryItem",
 "language": "GDScript",
-"path": "res://scripts/inventory/inventory_item.gd"
+"path": "res://scripts/player_inventory/inventory_item.gd"
 }, {
 "base": "Resource",
 "class": "ItemResource",
 "language": "GDScript",
 "path": "res://scripts/resources/item_resource.gd"
-}, {
-"base": "Reference",
-"class": "PlayerInventory",
-"language": "GDScript",
-"path": "res://scripts/inventory/player_inventory.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Spaceship",
@@ -64,7 +59,6 @@ _global_script_class_icons={
 "CrystalResource": "",
 "InventoryItem": "",
 "ItemResource": "",
-"PlayerInventory": "",
 "Spaceship": "",
 "SpaceshipStateMachine": "",
 "State": "",
@@ -81,6 +75,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GameState="*res://scenes/game/game_state.gd"
+PlayerInventory="*res://scripts/player_inventory/player_inventory.gd"
 
 [display]
 

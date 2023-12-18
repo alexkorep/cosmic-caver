@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/harvest_point/harvest_point.gd" type="Script" id=1]
-[ext_resource path="res://assets/cave/crystals.png" type="Texture" id=2]
+[ext_resource path="res://assets/resources/Azurite.png" type="Texture" id=2]
 [ext_resource path="res://assets/cave/crystal-small.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -10,7 +10,7 @@ radius = 99.3227
 [sub_resource type="CircleShape2D" id=2]
 radius = 46.8402
 
-[node name="ResourceEmitter" type="Area2D"]
+[node name="HarvestPoint" type="Area2D"]
 collision_layer = 0
 script = ExtResource( 1 )
 
@@ -26,24 +26,10 @@ initial_velocity = 165.14
 scale_amount = 0.2
 scale_amount_random = 0.51
 
-[node name="Sprites" type="Node2D" parent="."]
-
-[node name="Sulfur" type="Sprite" parent="Sprites"]
+[node name="ResourceIconSprite" type="Sprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
-region_enabled = true
 region_rect = Rect2( 864.258, 664.992, 101.535, 77.5256 )
-
-[node name="Azurite" type="Sprite" parent="Sprites"]
-visible = false
-texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 677.627, 565.667, 107.465, 98.1442 )
-
-[node name="Chromium" type="Sprite" parent="Sprites"]
-visible = false
-texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 391.152, 556.346, 66.3433, 111.303 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -51,7 +37,11 @@ shape = SubResource( 1 )
 [node name="Core" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Core"]
+position = Vector2( 0, 1 )
 shape = SubResource( 2 )
+
+[node name="ResourceHarvestedTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="." to="." method="on_body_entered"]
 [connection signal="body_exited" from="." to="." method="on_body_exited"]
+[connection signal="timeout" from="ResourceHarvestedTimer" to="." method="_on_Timer_timeout"]

@@ -1,4 +1,5 @@
-class_name PlayerInventory
+extends Node
+
 var items: Dictionary = {} # Key: ItemResource's name, Value: InventoryItem
 
 func add_item(resource: ItemResource, amount: int = 1):
