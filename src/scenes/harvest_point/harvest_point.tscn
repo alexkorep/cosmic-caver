@@ -67,7 +67,7 @@ custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
 max_value = 10.0
 step = 1.0
-value = 6.0
+value = 10.0
 percent_visible = false
 
 [node name="ResourceHarvestedTimer" type="Timer" parent="."]

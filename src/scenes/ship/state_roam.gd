@@ -25,11 +25,6 @@ func handle_input(event: InputEvent) -> void:
 func move_to(target: Vector2) -> void:
 	stop_all()
 
-	# If the distance between (0,0) and targest is outside of range, emit signal and return
-	if target.length() > owner.max_range:
-		owner.emit_clicked_outside_range()
-		return
-
 	current_tween = Tween.new()
 	owner.add_child(current_tween)
 

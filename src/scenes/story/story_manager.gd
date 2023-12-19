@@ -45,8 +45,6 @@ func on_level(level):
 		print("No more messages for level " + str(level))
 		return
 
-	var message = messages[level]
-
 	# Make a timer that will emit the next message.
 	var timer = Timer.new()
 	timer.set_wait_time(emit_message_time_sec)
@@ -61,6 +59,3 @@ func emit_next_message():
 	current_message += 1
 	if current_message >= message_list.size():
 		current_message = 0
-
-func on_clicked_outside_range():
-	emit_signal("on_story_message", "I cannot get there. Just cannot.")
