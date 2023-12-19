@@ -109,3 +109,4 @@ func check_destruction():
 			
 	emit_signal("destructed", self)
 	queue_free()
+	# TODO have some explosion animation
