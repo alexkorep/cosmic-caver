@@ -1,4 +1,4 @@
-tool
+@tool
 extends Area2D
 
 
@@ -22,15 +22,15 @@ Iron Silicates: Minerals like olivine or peridot can have a green color due to i
 """
 
 
-export(Resource) var inventory_item setget set_inventory_item
-export var max_amount = 10
-export var current_amount = 10
-export var texture: Texture = null setget set_texture
+@export var inventory_item: Resource: set = set_inventory_item
+@export var max_amount = 10
+@export var current_amount = 10
+@export var texture: Texture2D = null: set = set_texture
 
-onready var ResourceIconSprite = $ResourceIconSprite
-onready var CPUParticles2D = $CPUParticles2D
-onready var ResourceHarvestedTimer = $ResourceHarvestedTimer
-onready var ProgressBar = $ProgressBar
+@onready var ResourceIconSprite = $ResourceIconSprite
+@onready var CPUParticles2D = $CPUParticles2D
+@onready var ResourceHarvestedTimer = $ResourceHarvestedTimer
+@onready var ProgressBar = $ProgressBar
 
 var nearby_body = null
 

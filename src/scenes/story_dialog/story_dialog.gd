@@ -1,6 +1,6 @@
 extends Control
 
-onready var MessageLabel = $MarginContainer/VBoxContainer/MessageLabel
+@onready var MessageLabel = $MarginContainer/VBoxContainer/MessageLabel
 
 func _ready():
 	MessageLabel.text = ''

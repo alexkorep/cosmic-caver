@@ -1,12 +1,12 @@
-tool
+@tool
 extends Control
 
-export (Texture) var texture setget set_texture
-export (int) var quantity setget set_quantity
-export (int) var quantity_required setget set_quantity_required
+@export (Texture2D) var texture : set = set_texture
+@export (int) var quantity : set = set_quantity
+@export (int) var quantity_required : set = set_quantity_required
 
-onready var TextureRect = $HBoxContainer/TextureRect
-onready var Label = $HBoxContainer/Label
+@onready var TextureRect = $HBoxContainer/TextureRect
+@onready var Label = $HBoxContainer/Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

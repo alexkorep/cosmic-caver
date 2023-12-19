@@ -3,9 +3,9 @@ class_name Asteroid
 
 signal asteroid_hit(asteroid, body)
 
-export var asteroid_id = 0
-onready var Sprites = $Sprites
-onready var CollisionShape2D = $CollisionShape2D
+@export var asteroid_id = 0
+@onready var Sprites = $Sprites
+@onready var CollisionShape2D = $CollisionShape2D
 
 
 func _ready():

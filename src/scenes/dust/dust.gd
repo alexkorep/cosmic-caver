@@ -2,8 +2,8 @@ extends Node2D
 
 signal on_dust_collected()
 
-export var particle_count = 100
-export var size = 1000
+@export var particle_count = 100
+@export var size = 1000
 
 const dust_particle_scene = preload("res://scenes/dust/dust_particle.tscn")
 
@@ -21,8 +21,8 @@ func _on_dust_particle_dead(body):
 	emit_signal("on_dust_collected")
 
 func add_particle():
-	var dust_particle = dust_particle_scene.instance()
+	var dust_particle = dust_particle_scene.instantiate()
 	add_child(dust_particle)
-	dust_particle.position = Vector2(rand_range(-size, size), rand_range(-size, size))
+	dust_particle.position = Vector2(randf_range(-size, size), randf_range(-size, size))
 	# Connect to dust particle's signal dust_particle_dead
-	dust_particle.connect("dust_particle_dead", self, "_on_dust_particle_dead")
+	dust_particle.connect("dust_particle_dead", Callable(self, "_on_dust_particle_dead"))

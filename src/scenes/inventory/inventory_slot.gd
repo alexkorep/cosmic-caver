@@ -1,11 +1,11 @@
-tool
+@tool
 extends Control
 
 
-export  (Resource) var inventory_item setget set_inventory_item
+@export  (Resource) var inventory_item : set = set_inventory_item
 
-onready var TextureRect = $TextureRect
-onready var Label = $Label
+@onready var TextureRect = $TextureRect
+@onready var Label = $Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,7 +24,7 @@ func update_texture():
 		$TextureRect.texture = inventory_item.icon
 	
 func update_auantity_and_visibility():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		return
 	var qty = PlayerInventory.get_item_quantity(inventory_item)
 	Label.text = str(qty)

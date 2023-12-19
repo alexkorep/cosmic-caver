@@ -12,8 +12,10 @@ func enter(_msg := {}) -> void:
 	owner.rotation = wrap_angle(owner.rotation)
 
 func update(delta: float) -> void:
-	if OS.get_ticks_msec() <= move_end_time:
-		owner.move_and_slide(velocity)
+	if Time.get_ticks_msec() <= move_end_time:
+		owner.set_velocity(velocity)
+		owner.move_and_slide()
+		owner.velocity
 	
 func handle_input(event: InputEvent) -> void:
 	if ((event is InputEventMouseButton and event.pressed) or 
@@ -45,7 +47,7 @@ func move_to(target: Vector2) -> void:
 		owner.rotation, target_angle, duration, 
 		Tween.TRANS_BACK, Tween.EASE_IN_OUT)
 	# Connect the tween_completed signal to start moving
-	current_tween.connect("tween_completed", self, "_on_rotation_completed", [target])
+	current_tween.connect("tween_completed", Callable(self, "_on_rotation_completed").bind(target))
 	current_tween.start()
 
 func _on_rotation_completed(object: Object, key: NodePath, target: Vector2) -> void:
@@ -54,11 +56,13 @@ func _on_rotation_completed(object: Object, key: NodePath, target: Vector2) -> v
 	# Calculate duration based on speed
 	var move_duration = owner.position.distance_to(target) / owner.max_speed
 	# Get timer end time
-	move_end_time = OS.get_ticks_msec() + move_duration * 1000
+	move_end_time = Time.get_ticks_msec() + move_duration * 1000
 	# Move to the target
 	# Set owner speed towards target
 	velocity = (target - owner.position).normalized() * owner.max_speed
-	owner.move_and_slide(velocity)
+	owner.set_velocity(velocity)
+	owner.move_and_slide()
+	owner.velocity
 
 func wrap_angle(angle):
 	var two_pi = 2 * PI

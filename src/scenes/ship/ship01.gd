@@ -1,16 +1,16 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Spaceship
 
 signal ship_submerged
 signal ship_exploded
 
-export var max_speed := 200.0
-export var max_rotation_speed := 2
+@export var max_speed := 200.0
+@export var max_rotation_speed := 2
 
-onready var SpaceshipStateMachine = $SpaceshipStateMachine
-onready var Explosion = $Explosion
-onready var ExplosionParticles = $Explosion/ExplosionParticles
-onready var Ship = $Ship
+@onready var SpaceshipStateMachine = $SpaceshipStateMachine
+@onready var Explosion = $Explosion
+@onready var ExplosionParticles = $Explosion/ExplosionParticles
+@onready var Ship = $Ship
 
 func mission_completed():
 	SpaceshipStateMachine.transition_to("Submerge")

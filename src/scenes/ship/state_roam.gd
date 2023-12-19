@@ -43,7 +43,7 @@ func move_to(target: Vector2) -> void:
 		owner.rotation, target_angle, duration, 
 		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	# Connect the tween_completed signal to start moving
-	current_tween.connect("tween_completed", self, "_on_rotation_completed", [target])
+	current_tween.connect("tween_completed", Callable(self, "_on_rotation_completed").bind(target))
 	current_tween.start()
 
 func _on_rotation_completed(object: Object, key: NodePath, target: Vector2) -> void:

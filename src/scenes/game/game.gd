@@ -4,12 +4,12 @@ extends Node2D
 # 1 - player
 
 var dust_collected = 0
-export var dust_to_collect = 10
+@export var dust_to_collect = 10
 
-onready var GameOverDialog = $CanvasLayer/GameOverDialog
-onready var Spaceship = $Spaceship
-onready var StoryDialog = $CanvasLayer/StoryDialog
-onready var StoryManager = $StoryManager
+@onready var GameOverDialog = $CanvasLayer/GameOverDialog
+@onready var Spaceship = $Spaceship
+@onready var StoryDialog = $CanvasLayer/StoryDialog
+@onready var StoryManager = $StoryManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,7 +26,7 @@ func on_game_over_dialog_new_game():
 func reset_scene():
 	var current_scene = get_tree().current_scene
 	var scene_path = current_scene.filename
-	get_tree().change_scene(scene_path)
+	get_tree().change_scene_to_file(scene_path)
 
 func on_asteroid_hit():
 	GameOverDialog.show_gameover()
@@ -49,5 +49,5 @@ func _on_Spaceship_ship_exploded():
 func on_dp_destructed(dp_object):
 	var TileMap = $TileMap
 	var position = dp_object.get_global_position()
-	var tile_position = TileMap.world_to_map(position)
+	var tile_position = TileMap.local_to_map(position)
 	TileMap.set_cellv(tile_position, -1)

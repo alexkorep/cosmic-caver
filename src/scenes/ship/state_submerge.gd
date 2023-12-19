@@ -4,7 +4,7 @@ var finished := false
 
 func enter(_msg := {}) -> void:
 	# Disable collisions for owner
-	owner.set_collision_layer_bit(0, false)
+	owner.set_collision_layer_value(0, false)
 
 	var target_position = Vector2(0, 0)
 
@@ -28,7 +28,7 @@ func enter(_msg := {}) -> void:
 	tween.interpolate_property(owner, "position", owner.position, target_position, duration, 
 		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 
-	tween.connect("tween_completed", self, "_on_tween_completed")
+	tween.connect("tween_completed", Callable(self, "_on_tween_completed"))
 	tween.start()
 
 func _on_tween_completed(object: Object, key: NodePath) -> void:

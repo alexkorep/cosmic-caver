@@ -1,4 +1,4 @@
 extends Resource
 class_name ItemResource
-export(String) var name = "Item"
-export(Texture) var icon
+@export var name: String = "Item"
+@export var icon: Texture2D

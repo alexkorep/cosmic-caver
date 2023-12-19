@@ -18,4 +18,4 @@ func _ready():
 
 func _on_OkButton_pressed():
 	# Open res://scenes/game/game.tscn
-	get_tree().change_scene("res://scenes/game/game.tscn")
+	get_tree().change_scene_to_file("res://scenes/game/game.tscn")

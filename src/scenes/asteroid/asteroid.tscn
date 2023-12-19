@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/debris/asteroids01.png" type="Texture" id=1]
+[ext_resource path="res://assets/debris/asteroids01.png" type="Texture2D" id=1]
 [ext_resource path="res://scenes/asteroid/asteroid.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -8,7 +8,7 @@ radius = 59.6657
 
 [node name="Asteroid" type="RigidBody2D"]
 collision_layer = 0
-contacts_reported = 1
+max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 2 )
 
@@ -17,25 +17,25 @@ shape = SubResource( 1 )
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Asteroid01" type="Sprite" parent="Sprites"]
+[node name="Asteroid01" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 10.1541, 11.8308, 116.522, 117.801 )
 
-[node name="Asteroid02" type="Sprite" parent="Sprites"]
+[node name="Asteroid02" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 150.212, 9.97405, 100.625, 108.756 )
 
-[node name="Asteroid03" type="Sprite" parent="Sprites"]
+[node name="Asteroid03" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 272.003, 20.625, 85.7173, 85.3785 )
 
-[node name="Asteroid04" type="Sprite" parent="Sprites"]
+[node name="Asteroid04" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource( 1 )
 region_enabled = true

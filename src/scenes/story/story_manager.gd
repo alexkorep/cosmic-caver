@@ -49,7 +49,7 @@ func on_level(level):
 	var timer = Timer.new()
 	timer.set_wait_time(emit_message_time_sec)
 	timer.set_one_shot(false)
-	timer.connect("timeout", self, "emit_next_message")
+	timer.connect("timeout", Callable(self, "emit_next_message"))
 	add_child(timer)
 	timer.start()
 

@@ -1,11 +1,11 @@
 extends Node2D
 
-export var radius = 500
-export var radial_line_length = 500
+@export var radius = 500
+@export var radial_line_length = 500
 var color = Color(0, 1, 0)
 var point_count = radius/20
 
-onready var CollisionPolygon2D = $CollisionPolygon2D
+@onready var CollisionPolygon2D = $CollisionPolygon2D
 
 
 func _ready():

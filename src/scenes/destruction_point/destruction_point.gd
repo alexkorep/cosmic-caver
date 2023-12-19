@@ -1,17 +1,17 @@
-tool
+@tool
 extends Area2D
 
 signal destructed(dp_object)
 
-export (Array) var resources = [] setget set_resources
-export (Array) var quantities = [] setget set_quantities
+@export (Array) var resources = []: set = set_resources
+@export (Array) var quantities = []: set = set_quantities
 var fulfilled_quantities = []
 
 var Slot = load("res://scenes/destruction_point/dp_resource_slot.tscn")
 var nearby_body = null
 
-onready var CPUParticles2D = $CPUParticles2D
-onready var ResourceExtractionTimer = $ResourceExtractionTimer
+@onready var CPUParticles2D = $CPUParticles2D
+@onready var ResourceExtractionTimer = $ResourceExtractionTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,7 +40,7 @@ func update_slots():
 		var resource = resources[i]
 		var quantity = quantities[i] if len(quantities) > i else 0
 		var fulfilled = fulfilled_quantities[i] if len(fulfilled_quantities) > i else 0
-		var slot = Slot.instance()
+		var slot = Slot.instantiate()
 		slot.texture = resource.icon
 		slot.quantity_required = quantity
 		slot.quantity = fulfilled
