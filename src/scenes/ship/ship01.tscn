@@ -38,24 +38,19 @@ texture = ExtResource("2")
 direction = Vector2(0, 1)
 spread = 0.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 106.06
 color_ramp = SubResource("1")
 
 [node name="EngineParticles2" type="CPUParticles2D" parent="Ship"]
-position = Vector2(36, 32)
+position = Vector2(34, 30)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2")
 direction = Vector2(0, 1)
 spread = 0.0
 gravity = Vector2(0, 0)
-color_ramp = SubResource("1")
-
-[node name="EngineParticles3" type="CPUParticles2D" parent="Ship"]
-position = Vector2(0, 30)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2")
-direction = Vector2(0, 1)
-spread = 0.0
-gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 106.06
 color_ramp = SubResource("1")
 
 [node name="ShipSprite" type="Sprite2D" parent="Ship"]

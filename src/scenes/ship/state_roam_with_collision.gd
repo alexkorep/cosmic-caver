@@ -69,8 +69,7 @@ func wrap_angle(angle):
 
 func stop_all():
 	if current_tween != null:
-		current_tween.stop_all()
-		current_tween.queue_free()
+		current_tween.stop()
 		current_tween = null
 
 func exit() -> void:
