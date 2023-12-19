@@ -53,7 +53,8 @@ func add_particle_if_empty_neightbour(pos):
 					add_particle(screen_pos)
 
 func _on_dust_particle_dead(body):
-	emit_signal("on_dust_collected")
+	if body is Spaceship:
+		emit_signal("on_dust_collected")
 
 func add_particle(pos):
 	var dust_particle = dust_particle_scene.instance()
