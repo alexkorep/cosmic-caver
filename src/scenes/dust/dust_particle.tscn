@@ -18,3 +18,14 @@ shape = SubResource( 1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 872.408, 913.281, 18.4014, 18.2294 )
+
+[node name="RoamTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 45.0
+autostart = true
+
+[connection signal="timeout" from="RoamTimer" to="." method="_on_RoamTimer_timeout"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_KillTimer_timeout"]
