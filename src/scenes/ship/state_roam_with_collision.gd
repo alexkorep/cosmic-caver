@@ -5,6 +5,7 @@ var current_tween: Tween = null
 var velocity = Vector2.ZERO
 
 var move_end_time = 0
+var movement_target: Vector2
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(_msg := {}) -> void:
@@ -28,9 +29,9 @@ func handle_input(event: InputEvent) -> void:
 	
 func move_to(target: Vector2) -> void:
 	stop_all()
+	movement_target = target
 
-	current_tween = Tween.new()
-	owner.add_child(current_tween)
+	current_tween = owner.create_tween()
 
 	# Rotate to face the target
 	var direction_to_target = target - owner.position
@@ -43,26 +44,24 @@ func move_to(target: Vector2) -> void:
 		target_angle += 2 * PI
 	# Calculate duration based on rotation speed
 	var duration = abs((target_angle - owner.rotation) / owner.max_rotation_speed)
-	current_tween.interpolate_property(owner, "rotation", 
-		owner.rotation, target_angle, duration, 
-		Tween.TRANS_BACK, Tween.EASE_IN_OUT)
-	# Connect the tween_completed signal to start moving
-	current_tween.connect("tween_completed", Callable(self, "_on_rotation_completed").bind(target))
-	current_tween.start()
+	current_tween.tween_property(owner, "rotation", 
+		target_angle, duration).set_trans(
+			Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+	current_tween.connect("finished", _on_rotation_completed)
+	current_tween.play()
 
-func _on_rotation_completed(object: Object, key: NodePath, target: Vector2) -> void:
+func _on_rotation_completed() -> void:
 	owner.rotation = wrap_angle(owner.rotation)
 	# Start moving to the target
 	# Calculate duration based on speed
-	var move_duration = owner.position.distance_to(target) / owner.max_speed
+	var move_duration = owner.position.distance_to(movement_target) / owner.max_speed
 	# Get timer end time
 	move_end_time = Time.get_ticks_msec() + move_duration * 1000
 	# Move to the target
 	# Set owner speed towards target
-	velocity = (target - owner.position).normalized() * owner.max_speed
+	velocity = (movement_target - owner.position).normalized() * owner.max_speed
 	owner.set_velocity(velocity)
 	owner.move_and_slide()
-	owner.velocity
 
 func wrap_angle(angle):
 	var two_pi = 2 * PI

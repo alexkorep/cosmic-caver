@@ -28,9 +28,9 @@ Iron Silicates: Minerals like olivine or peridot can have a green color due to i
 @export var texture: Texture2D = null: set = set_texture
 
 @onready var ResourceIconSprite = $ResourceIconSprite
-@onready var CPUParticles2D = $CPUParticles2D
+@onready var cpuParticles2D = $CPUParticles2D
 @onready var ResourceHarvestedTimer = $ResourceHarvestedTimer
-@onready var ProgressBar = $ProgressBar
+@onready var progressBar = $ProgressBar
 
 var nearby_body = null
 
@@ -52,7 +52,7 @@ func _process(delta):
 	# This is needed to make sure the sprites update in the editor
 	update_sprite()
 	if nearby_body:
-		CPUParticles2D.direction = (nearby_body.global_position - global_position).normalized()
+		cpuParticles2D.direction = (nearby_body.global_position - global_position).normalized()
 
 func update_sprite():
 	if not texture:
@@ -60,8 +60,8 @@ func update_sprite():
 	$ResourceIconSprite.texture = texture
 
 func update_progress_bar():
-	ProgressBar.value = current_amount
-	ProgressBar.max_value = max_amount
+	progressBar.value = current_amount
+	progressBar.max_value = max_amount
 
 func on_body_entered(body):
 	# Start emitting CPUParticles2D when the player enters the area, towards the player
@@ -69,11 +69,11 @@ func on_body_entered(body):
 		nearby_body = body
 		ResourceHarvestedTimer.start()
 		if current_amount > 0:
-			CPUParticles2D.direction = (nearby_body.global_position - global_position).normalized()
-			CPUParticles2D.emitting = true
+			cpuParticles2D.direction = (nearby_body.global_position - global_position).normalized()
+			cpuParticles2D.emitting = true
 
 func on_body_exited(body):
-	CPUParticles2D.emitting = false
+	cpuParticles2D.emitting = false
 	nearby_body = null
 	ResourceHarvestedTimer.stop()
 
@@ -83,7 +83,7 @@ func _on_Timer_timeout():
 		current_amount -= 1
 
 	if current_amount <= 0:
-		CPUParticles2D.emitting = false
+		cpuParticles2D.emitting = false
 	update_progress_bar()
 
 func _on_ResouceRestoreTimer_timeout():

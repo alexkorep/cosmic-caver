@@ -1,28 +1,32 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://d4cr8xbqcy556"]
 
-[ext_resource path="res://assets/resources/Sulfur.png" type="Texture2D" id=1]
-[ext_resource path="res://scenes/inventory/inventory_slot.gd" type="Script" id=2]
-[ext_resource path="res://resources/crystals/sulfur.tres" type="Resource" id=3]
+[ext_resource type="Texture2D" uid="uid://oth63ek6rl4b" path="res://assets/resources/Sulfur.png" id="1"]
+[ext_resource type="Script" path="res://scenes/inventory/inventory_slot.gd" id="2"]
+[ext_resource type="Resource" path="res://resources/crystals/sulfur.tres" id="3"]
 
 [node name="InventorySlot" type="Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -320.0
 offset_bottom = -680.0
-custom_minimum_size = Vector2( 40, 40 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 2 )
-inventory_item = ExtResource( 3 )
+script = ExtResource("2")
+inventory_item = ExtResource("3")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 1 )
-expand = true
+texture = ExtResource("1")
+expand_mode = 1
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0

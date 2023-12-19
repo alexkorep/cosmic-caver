@@ -1,12 +1,12 @@
 @tool
 extends Control
 
-@export (Texture2D) var texture : set = set_texture
-@export (int) var quantity : set = set_quantity
-@export (int) var quantity_required : set = set_quantity_required
+@export var texture: Texture2D : set = set_texture
+@export var quantity: int : set = set_quantity
+@export var quantity_required: int : set = set_quantity_required
 
-@onready var TextureRect = $HBoxContainer/TextureRect
-@onready var Label = $HBoxContainer/Label
+@onready var textureRect = $HBoxContainer/TextureRect
+@onready var label = $HBoxContainer/Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,10 +25,10 @@ func set_quantity(value):
 	update_ui()
 
 func update_ui():
-	if TextureRect:
-		TextureRect.texture = texture
-	if Label:
-		Label.text = str(quantity) + '/' + str(quantity_required)
+	if textureRect:
+		textureRect.texture = texture
+	if label:
+		label.text = str(quantity) + '/' + str(quantity_required)
 
 func _process(delta):
 	update_ui()

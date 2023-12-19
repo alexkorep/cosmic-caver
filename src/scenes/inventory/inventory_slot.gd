@@ -1,11 +1,13 @@
 @tool
 extends Control
 
+@export var inventory_item: Resource: 
+	set (value):
+		inventory_item = value
+		update_texture()
 
-@export  (Resource) var inventory_item : set = set_inventory_item
-
-@onready var TextureRect = $TextureRect
-@onready var Label = $Label
+@onready var textureRect = $TextureRect
+@onready var label = $Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,19 +15,14 @@ func _ready():
 
 func _process(_delta):
 	update_auantity_and_visibility()
-
-func set_inventory_item(value):
-	inventory_item = value
-	update_texture()
 	
 func update_texture():
-	TextureRect = $TextureRect
-	if inventory_item and TextureRect:
+	if inventory_item and textureRect:
 		$TextureRect.texture = inventory_item.icon
 	
 func update_auantity_and_visibility():
 	if Engine.is_editor_hint():
 		return
 	var qty = PlayerInventory.get_item_quantity(inventory_item)
-	Label.text = str(qty)
+	label.text = str(qty)
 	visible = qty > 0
