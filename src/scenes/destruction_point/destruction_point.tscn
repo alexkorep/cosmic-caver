@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://resources/crystals/diamond.tres" type="Resource" id=1]
+[ext_resource path="res://assets/debris/debris_piece.png" type="Texture" id=2]
+[ext_resource path="res://scenes/destruction_point/destruction_point.gd" type="Script" id=3]
+[ext_resource path="res://resources/crystals/azurite.tres" type="Resource" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 92.0489
+
+[node name="DestructionPoint" type="Area2D"]
+script = ExtResource( 3 )
+resources = [ ExtResource( 4 ), ExtResource( 1 ) ]
+quantities = [ 2, 4 ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Components" type="Control" parent="."]
+margin_left = -48.0
+margin_top = -31.0
+margin_right = 48.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 96, 64 )
+
+[node name="ColorRect" type="ColorRect" parent="Components"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.741176 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Components"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 92, 0 )
+amount = 3
+lifetime = 0.5
+explosiveness = 0.52
+texture = ExtResource( 2 )
+direction = Vector2( -1, 0 )
+spread = 5.78
+gravity = Vector2( 0, 0 )
+initial_velocity = 165.14
+scale_amount = 0.2
+scale_amount_random = 0.51
