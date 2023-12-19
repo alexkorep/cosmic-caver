@@ -34,6 +34,7 @@ anchor_bottom = 1.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 92, 0 )
+emitting = false
 amount = 3
 lifetime = 0.5
 explosiveness = 0.52
@@ -44,3 +45,6 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 165.14
 scale_amount = 0.2
 scale_amount_random = 0.51
+
+[connection signal="body_entered" from="." to="." method="on_body_entered"]
+[connection signal="body_exited" from="." to="." method="on_body_exited"]
