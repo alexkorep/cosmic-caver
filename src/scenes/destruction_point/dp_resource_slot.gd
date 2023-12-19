@@ -29,6 +29,6 @@ func update_ui():
 		TextureRect.texture = texture
 	if Label:
 		Label.text = str(quantity) + '/' + str(quantity_required)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func _process(delta):
+	update_ui()

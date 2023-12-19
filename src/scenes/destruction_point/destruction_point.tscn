@@ -46,5 +46,9 @@ initial_velocity = 165.14
 scale_amount = 0.2
 scale_amount_random = 0.51
 
+[node name="ResourceExtractionTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [connection signal="body_entered" from="." to="." method="on_body_entered"]
 [connection signal="body_exited" from="." to="." method="on_body_exited"]
+[connection signal="timeout" from="ResourceExtractionTimer" to="." method="extract_resources_step"]

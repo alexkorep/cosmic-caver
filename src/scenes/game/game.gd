@@ -44,3 +44,10 @@ func on_story_message(message):
 func _on_Spaceship_ship_exploded():
 	# Reload the scene
 	reset_scene()
+
+
+func on_dp_destructed(dp_object):
+	var TileMap = $TileMap
+	var position = dp_object.get_global_position()
+	var tile_position = TileMap.world_to_map(position)
+	TileMap.set_cellv(tile_position, -1)
