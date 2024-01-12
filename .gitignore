@@ -6,3 +6,4 @@ build/**/*
 .import
 export
 node_modules
+.DS_Store

@@ -35,6 +35,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Cave" parent="." instance=ExtResource( 4 )]
+tile_data = PoolIntArray( -131074, 5, 0, -131073, 5, 0, -196608, 5, 0, -196607, 5, 0, -196606, 5, 0, -65537, 5, 0, -131070, 5, 0, -131069, 5, 0, -65533, 5, 0, 4, 5, 0, 131067, 5, 0, 131068, 5, 0, 131069, 5, 0, 65540, 5, 0, 196603, 5, 0, 196604, 5, 0, 196605, 5, 0, 196606, 5, 0, 131077, 5, 0, 131078, 5, 0, 262139, 5, 0, 262140, 5, 0, 262141, 5, 0, 262143, 0, 0, 196609, 1, 0, 196614, 5, 0, 327677, 5, 0, 327679, 0, 0, 262146, 1, 0, 262151, 5, 0, 393212, 5, 0, 393215, 0, 0, 327681, 1, 0, 327687, 5, 0, 458749, 5, 0, 393220, 3, 0, 393221, 3, 0, 393224, 5, 0, 524284, 5, 0, 458757, 3, 0, 458759, 5, 0, 589821, 5, 0, 524289, 2, 0, 524296, 5, 0, 655357, 5, 0, 589825, 2, 0, 589826, 2, 0, 589831, 5, 0, 720894, 5, 0, 655365, 4, 0, 655367, 5, 0, 655368, 5, 0, 786430, 5, 0, 720899, 4, 0, 720900, 4, 0, 720902, 5, 0, 720903, 5, 0, 851967, 5, 0, 786432, 5, 0, 786438, 5, 0, 786439, 5, 0, 917503, 5, 0, 851968, 5, 0, 851969, 5, 0, 851973, 5, 0, 917506, 5, 0, 917507, 5, 0, 917508, 5, 0, 917509, 5, 0 )
 
 [node name="Spaceship" parent="." instance=ExtResource( 3 )]
 max_speed = 400.0
@@ -52,6 +53,9 @@ mouse_filter = 2
 [node name="StoryDialog" parent="CanvasLayer" instance=ExtResource( 8 )]
 
 [node name="StoryManager" parent="." instance=ExtResource( 9 )]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.498039, 0.247059, 0.247059, 1 )
 
 [connection signal="ship_exploded" from="Spaceship" to="." method="_on_Spaceship_ship_exploded"]
 [connection signal="ship_submerged" from="Spaceship" to="." method="_on_Spaceship_ship_submerged"]
